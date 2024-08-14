@@ -23,7 +23,7 @@ const GPTSearchBar = () => {
     const handleGPTSearchClick = async () => {
         try {
             const userInput = searchText.current.value;
-            console.log(userInput);
+            //console.log(userInput);
 
             const gptQuery = `Act as a movie recommendation system and suggest me some movies based on the following preferences: ${userInput}. Only give the names of the top 5 movies, comma-separated like the example result given ahead. Example result: 3 Idiots, Sholay, Players, Golmaal, Lagaan`;
 
@@ -32,13 +32,13 @@ const GPTSearchBar = () => {
                 messages: [{ role: 'user', content: gptQuery }],
             });
 
-            console.log(gptResult.choices?.[0]?.message?.content);
+           // console.log(gptResult.choices?.[0]?.message?.content);
 
             const gptMovies = gptResult.choices?.[0]?.message?.content.split(",");
             const promiseArray = gptMovies.map(movie => searchMovieTMDB(movie.trim()));
             const tmdbResults = await Promise.all(promiseArray);
 
-            console.log(tmdbResults);
+           // console.log(tmdbResults);
             dispatch(addGPTMovieResult({movieNames: gptMovies, movieResults: tmdbResults})); // Fix: Dispatch the results
         } catch (error) {
             console.error('Error fetching GPT result:', error);

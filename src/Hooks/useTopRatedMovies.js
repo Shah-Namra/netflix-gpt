@@ -17,7 +17,7 @@ const useTopRatedMovies = () => {
        API_options
       )
     const json = await data.json();
-    console.log(json.results);
+    //console.log(json.results);
     dispatch(addTopRatedMovies(json.results));// it will show the movies in the console
   }
 
